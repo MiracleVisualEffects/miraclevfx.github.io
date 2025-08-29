@@ -1,0 +1,269 @@
+
+// sass --watch resources/style.scss resources/style.css
+
+@font-face {
+    font-family: 'Morion-Bold';
+    src: url('../resources/fonts/Morion-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Morion-Light';
+    src: url('../resources/fonts/Morion-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Inconsolata';
+    src: url('../resources/fonts/Inconsolata-Variable.ttf') format('truetype');
+}
+
+$black: hsl(220, 10%, 3%);
+$dark-blue: rgba(6, 13, 20, 1);
+$break: 600px;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #11294d;
+    background: radial-gradient(circle, rgba(17, 41, 77, 1) 0%, rgba(10, 21, 35, 1) 68%, $dark-blue 100%);
+
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Inconsolata', sans-serif;
+    font-weight: 100;
+    color: #f1f0de;
+    font-kerning: normal;
+}
+header, footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+main {
+    min-height: calc(100vh - 180px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+
+.container {
+    height: 100%;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 20px;
+}
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.flex-spread {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+
+header {
+    top: 0;
+    text-align: center;
+    height: 80px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+    padding: 10px 30px;
+
+    hr {
+        width: 100%;
+        border: 1px solid #1d2838;
+    }
+    #logo {
+        height: 100%;
+    }
+}
+
+
+footer {
+    background: $black;
+    text-align: center;
+    min-height: 100px;
+    padding: 10px 30px;
+
+    #working-miracles {
+        font-family: 'Morion-Bold', serif;
+        letter-spacing: 0;
+        font-size: 20px;
+        text-align: center;
+
+        >* {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            height: 60px;
+        }
+    }
+
+    #contact-info {
+        text-align: right;
+        font-family: 'Inconsolata', monospace;
+        font-size: 14px;
+        line-height: 1.4em;
+    }
+}
+
+
+
+#motd {
+    transition: filter 1s ease;
+    margin-bottom: 30px;
+    display: flex;
+
+    br {
+        @media screen and (min-width: $break) {
+            display: none;
+        }
+    }
+
+
+    &:hover {
+        filter: blur(10px) saturate(2);
+    }
+    h1 {
+        font-weight: 200;
+        font-size: 25px;
+        text-align: center;
+        color: #253c5e;
+        letter-spacing: 2px;
+
+        #crafting-light {
+            color: #314f7b;
+        }
+    }
+}
+
+
+
+.gallery {
+
+    display: grid;
+    gap: 20px;
+
+    .item {
+        position: relative;
+        height: 200px;
+        width: 100%;
+
+        @media screen and (min-width: $break) {
+            height: 300px;
+        }
+
+        >div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            
+            background: $black;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            transition: opacity 350ms ease, transform 200ms ease;
+
+            &.main {
+                z-index: 5;
+                box-shadow: 0 5px 15px rgba($black, 50%);
+                
+                .content {
+                    
+
+                    background: radial-gradient(ellipse at bottom left, rgba($dark-blue, 1) 0%, rgba($dark-blue, 0) 50%);
+                    border-radius: inherit;
+
+                    width: 100%;
+                    height: 100%;
+
+                    padding: 20px;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    justify-content: end;
+
+                    >* {
+                        padding: 0;
+                        margin: 0;
+                        transition: transform 200ms ease;
+                    }
+
+                    h2 {
+                        font-family: 'Morion-Bold', 'serif';
+                    }
+                    p {
+                        
+                    }
+                }
+
+            }
+            &.copy1 {
+                z-index: 2;
+                filter: blur(4px) brightness(1.5);
+                opacity: .3;
+            }
+            &.copy2 {
+                z-index: 1;
+                filter: blur(25px) saturate(2) brightness(1.5);
+                opacity: .3;
+            }
+        }
+        &:hover>div {
+            transform: translateY(-3px);
+
+            &.copy1 {
+                opacity: .4;
+            }
+            &.copy2 {
+                opacity: .4;
+            }
+
+            .content * {
+                transform: translateY(3px);
+            }
+        }
+
+
+        &.arunas-magic>div {
+            background-image: url('thumbnails/arunas-magic.webp');
+            background-position: 0% 30%;
+        }
+        &.mussum>div {
+            background-image: url('thumbnails/mussum.jpg');
+            background-position: 0% 30%;
+        }
+        &.espirito-do-natal>div {
+            background-image: url('thumbnails/espirito-do-natal.webp');
+            background-position: 0% 50%;
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
